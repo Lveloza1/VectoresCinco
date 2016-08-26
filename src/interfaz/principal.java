@@ -15,8 +15,9 @@ public class principal extends javax.swing.JFrame {
 
     /**
      * Creates new form principal
-     */
+    txtLongitud.requestFocusInWindow(); */
     double v[];
+    
     public principal() {
         initComponents();
     }
@@ -61,6 +62,12 @@ public class principal extends javax.swing.JFrame {
 
         jLabel2.setText("Longitud");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 50, 20));
+
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 170, 120));
@@ -97,6 +104,11 @@ public class principal extends javax.swing.JFrame {
         jPanel4.add(cmdManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 140, 40));
 
         cmdSumatoria.setText("Sumatoria 2da parte");
+        cmdSumatoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSumatoriaActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdSumatoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 40));
 
         cmdCrear.setText("Crear");
@@ -108,6 +120,11 @@ public class principal extends javax.swing.JFrame {
         jPanel4.add(cmdCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 140, 40));
 
         cmdProductoria.setText("Productoria 1ra parte");
+        cmdProductoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdProductoriaActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdProductoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 40));
 
         cmdBorrar.setText("Borrar");
@@ -219,12 +236,58 @@ double n, f;
     }//GEN-LAST:event_cmdAutomaticoActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
-txtLongitud.setText(" ");
+     txtLongitud.setText(" ");
     txtResultado.setText(" ");
     v=null;
     txtLongitud.requestFocusInWindow();
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void cmdProductoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdProductoriaActionPerformed
+ double p=1;
+if(txtLongitud.getText().trim().isEmpty()){
+      JOptionPane.showMessageDialog(this,"Digite la longitud del vector","Error",JOptionPane.ERROR_MESSAGE);
+       txtLongitud.requestFocusInWindow();
+       
+        }
+    else{
+ int mitad;
+ mitad=(v.length/2);
+ 
+        for (int i = 0; i < mitad; i++) {
+            p=p*v[i];
+        }
+ txtResultado.append("\nproducto de la primera mitad: "+p);
+}      
+    }//GEN-LAST:event_cmdProductoriaActionPerformed
+
+    private void cmdSumatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSumatoriaActionPerformed
+double s=0;
+ if(txtLongitud.getText().trim().isEmpty()){
+      JOptionPane.showMessageDialog(this,"Digite la longitud del vector","Error",JOptionPane.ERROR_MESSAGE);
+       txtLongitud.requestFocusInWindow();
+       
+        }
+    else{
+int mitad;
+ mitad=(v.length/2);
+ 
+        for (int i = mitad; i < v.length; i++) {
+           s=s+v[i];
+        }
+ txtResultado.append("\nSumatoria de la segunda mitad: "+s);
+ }
+    }//GEN-LAST:event_cmdSumatoriaActionPerformed
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+ char c=evt.getKeyChar(); 
+       
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep();    
+              evt.consume(); 
+          }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLongitudKeyTyped
 
     /**
      * @param args the command line arguments
